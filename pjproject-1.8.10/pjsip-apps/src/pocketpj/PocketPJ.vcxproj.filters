@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a18e9bc5-5cd3-4f4b-b25d-03eab1609498}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d9a3d1d5-c6a8-467e-8cae-819dddd86852}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{f2054350-471e-4746-8720-5cef30029840}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PocketPJ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PocketPJDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PopUpWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PocketPJ.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="newres.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PocketPJ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PocketPJDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PopUpWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\action.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\blank.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\invisibl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\invisibl.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\offline.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\offline.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\online.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\online.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\PocketPJ.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\PocketPJ.rc2">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

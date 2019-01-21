@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug-Dynamic|Win32">
+      <Configuration>Debug-Dynamic</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug-Static|Win32">
+      <Configuration>Debug-Static</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-Dynamic|Win32">
+      <Configuration>Release-Dynamic</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-Static|Win32">
+      <Configuration>Release-Static</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E378A1FC-0C9C-4462-860F-7E60BC1BF84E}</ProjectGuid>
+    <RootNamespace>samples</RootNamespace>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dynamic|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dynamic|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\output\$(ProjectName)-i386-$(Platform)-vs8-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+    <NMakeBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release VC_VER=8</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release VC_VER=8 /a</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release VC_VER=8 clean</NMakeCleanCommandLine>
+    <NMakeOutput>All samples</NMakeOutput>
+    <NMakeAssemblySearchPath>C:\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86;$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\output\$(ProjectName)-i386-$(Platform)-vs8-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+    <NMakeBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug VC_VER=8</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug VC_VER=8 /a</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug VC_VER=8 clean</NMakeCleanCommandLine>
+    <NMakeOutput>All samples</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
+    <OutDir>.\output\$(ProjectName)-i386-$(Platform)-vs8-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+    <NMakeBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug-static VC_VER=8</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug-static VC_VER=8 /a</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug-static VC_VER=8 clean</NMakeCleanCommandLine>
+    <NMakeOutput>All samples</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|Win32'">
+    <OutDir>.\output\$(ProjectName)-i386-$(Platform)-vs8-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+    <NMakeBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release-dynamic VC_VER=8</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release-dynamic VC_VER=8 /a</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release-dynamic VC_VER=8 clean</NMakeCleanCommandLine>
+    <NMakeOutput>All samples</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dynamic|Win32'">
+    <OutDir>.\output\$(ProjectName)-i386-$(Platform)-vs8-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+    <NMakeBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug-dynamic VC_VER=8</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug-dynamic VC_VER=8 /a</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=debug-dynamic VC_VER=8 clean</NMakeCleanCommandLine>
+    <NMakeOutput>All samples</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
+    <OutDir>.\output\$(ProjectName)-i386-$(Platform)-vs8-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+    <NMakeBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release-static VC_VER=8</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release-static VC_VER=8 /a</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake /NOLOGO /S /f Samples-vc.mak BUILD_MODE=release-static VC_VER=8 clean</NMakeCleanCommandLine>
+    <NMakeOutput>All samples</NMakeOutput>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dynamic|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\samples\aectest.c" />
+    <ClCompile Include="..\src\samples\auddemo.c" />
+    <ClCompile Include="..\src\samples\confbench.c" />
+    <ClCompile Include="..\src\samples\confsample.c" />
+    <ClCompile Include="..\src\samples\encdec.c" />
+    <ClCompile Include="..\src\samples\footprint.c" />
+    <ClCompile Include="..\src\samples\httpdemo.c" />
+    <ClCompile Include="..\src\samples\icedemo.c" />
+    <ClCompile Include="..\src\samples\jbsim.c" />
+    <ClCompile Include="..\src\samples\latency.c" />
+    <ClCompile Include="..\src\samples\level.c" />
+    <ClCompile Include="..\src\samples\mix.c" />
+    <ClCompile Include="..\src\samples\pcaputil.c" />
+    <ClCompile Include="..\src\samples\pjsip-perf.c" />
+    <ClCompile Include="..\src\samples\playfile.c" />
+    <ClCompile Include="..\src\samples\playsine.c" />
+    <ClCompile Include="..\src\samples\recfile.c" />
+    <ClCompile Include="..\src\samples\resampleplay.c" />
+    <ClCompile Include="..\src\samples\simple_pjsua.c" />
+    <ClCompile Include="..\src\samples\simpleua.c" />
+    <ClCompile Include="..\src\samples\siprtp.c" />
+    <ClCompile Include="..\src\samples\siprtp_report.c" />
+    <ClCompile Include="..\src\samples\sipstateless.c" />
+    <ClCompile Include="..\src\samples\sndinfo.c" />
+    <ClCompile Include="..\src\samples\sndtest.c" />
+    <ClCompile Include="..\src\samples\stateful_proxy.c" />
+    <ClCompile Include="..\src\samples\stateless_proxy.c" />
+    <ClCompile Include="..\src\samples\streamutil.c" />
+    <ClCompile Include="..\src\samples\strerror.c" />
+    <ClCompile Include="..\src\samples\tonegen.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\samples\proxy.h" />
+    <ClInclude Include="..\src\samples\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples-vc.mak" />
+    <None Include="Samples.mak" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libpjproject.vcxproj">
+      <Project>{23d7679c-764c-4e02-8b29-bb882ceeefe2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
