@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      Platform: Win32
+      Configuration: Release
+      PJ_Configuration: Release-Static
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+    
+    - name: Build pjsip
+      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:PJ_Configuration -p:Platform=$env:Platform
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: pjsipDll
+        path: pjsipdll\build\$env:Configuration
