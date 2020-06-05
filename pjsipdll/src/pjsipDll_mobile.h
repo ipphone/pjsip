@@ -19,17 +19,18 @@
 // pjsipDll.h : Declares the entry point for the .Net GUI application.
 //
 
-#ifdef LINUX
-	#define __stdcall
-	#define PJSIPDLL_DLL_API
-#else
-#ifdef PJSIPDLL_EXPORTS
-	#define PJSIPDLL_DLL_API __declspec(dllexport)
-#else
-	#define PJSIPDLL_DLL_API __declspec(dllimport)
-#endif
-#endif
+// #ifdef LINUX
+// 	#define __stdcall
+// 	#define PJSIPDLL_DLL_API
+// #else
+// #ifdef PJSIPDLL_EXPORTS
+// 	#define PJSIPDLL_DLL_API __declspec(dllexport)
+// #else
+// 	#define PJSIPDLL_DLL_API __declspec(dllimport)
+// #endif
+// #endif
 
+#define PJSIPDLL_DLL_API __declspec(dllexport)
 
 // Structure containing pjsip configuration parameters
 // Should be synhronized with appropriate .Net structure!!!!!
@@ -58,17 +59,17 @@ struct SipConfigStruct
 };
 
 // calback function definitions
-typedef int __stdcall fptr_regstate(int, int);				// on registration state changed
-typedef int __stdcall fptr_callstate(int, int);	// on call state changed
-typedef int __stdcall fptr_callincoming(int, wchar_t*);	// on call incoming
-typedef int __stdcall fptr_getconfigdata(int);	// get config data
-typedef int __stdcall fptr_callholdconf(int);
-typedef int __stdcall fptr_callretrieveconf(int);
-typedef int __stdcall fptr_msgrec (wchar_t*, wchar_t*);
-typedef int __stdcall fptr_buddystatus(int, int, const wchar_t*);
-typedef int __stdcall fptr_dtmfdigit(int callId, int digit);
-typedef int __stdcall fptr_mwi(int mwi, wchar_t* info);
-typedef int __stdcall fptr_crep(int oldid, int newid);
+typedef int __cdecl fptr_regstate(int, int);				// on registration state changed
+typedef int __cdecl fptr_callstate(int, int);	// on call state changed
+typedef int __cdecl fptr_callincoming(int, wchar_t*);	// on call incoming
+typedef int __cdecl fptr_getconfigdata(int);	// get config data
+typedef int __cdecl fptr_callholdconf(int);
+typedef int __cdecl fptr_callretrieveconf(int);
+typedef int __cdecl fptr_msgrec (wchar_t*, wchar_t*);
+typedef int __cdecl fptr_buddystatus(int, int, const wchar_t*);
+typedef int __cdecl fptr_dtmfdigit(int callId, int digit);
+typedef int __cdecl fptr_mwi(int mwi, wchar_t* info);
+typedef int __cdecl fptr_crep(int oldid, int newid);
 
 // Callback registration 
 extern "C" PJSIPDLL_DLL_API int onRegStateCallback(fptr_regstate cb);	  // register registration notifier

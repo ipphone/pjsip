@@ -30,9 +30,11 @@
 *.exe
 *.out
 *.app
+*.pyc
 
 # Exclude build output
 **/output/**
+**/build/Debug/**
 **/build/Release/**
 *.log
 *.tlog
@@ -43,3 +45,6 @@
 *.sdf
 *.ncf
 **/.vs/**
+
+pjproject-1.8.10/**/bin/**
+pjsipdll/**/bin/**

@@ -22,15 +22,16 @@
 // pjsipDll.h : Declares the entry point for the .Net GUI application.
 //
 
-#ifdef PJSIPDLL_EXPORTS
-       #define PJSIPDLL_DLL_API __declspec(dllexport)
-#else
-       #define PJSIPDLL_DLL_API __declspec(dllimport)
-#endif
+// #ifdef PJSIPDLL_EXPORTS
+//        #define PJSIPDLL_DLL_API __declspec(dllexport)
+// #else
+//        #define PJSIPDLL_DLL_API __declspec(dllimport)
+// #endif
 
+#define PJSIPDLL_DLL_API __declspec(dllexport)
 
 // calback function definitions
-typedef int __stdcall fptr_wavplayerEnded(int CallId, int PlayerId);
+typedef int __cdecl fptr_wavplayerEnded(int CallId, int PlayerId);
 
  
 // Callback registration
