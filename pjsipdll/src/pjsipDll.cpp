@@ -348,12 +348,6 @@ PJSIPDLL_DLL_API int onCallIncoming(fptr_callincoming cb)
 	return 1;
 }
 
-PJSIPDLL_DLL_API int getConfigDataCallback(fptr_getconfigdata cb)
-{
-	cb_getconfigdata = cb;
-	return 1;
-}
-
 PJSIPDLL_DLL_API int onCallHoldConfirmCallback(fptr_callholdconf cb)
 {
 	cb_callholdconf = cb;
@@ -1955,10 +1949,11 @@ int dll_dumpCurrentState(char* buffer)
 
 /////////////////////////////////////////////////////////////////////////
 // SipConfig
-void dll_setSipConfig(SipConfigStruct* config)
+int dll_setSipConfig(SipConfigStruct* config)
 {
 	sipekConfigEnabled = true;
 	sipek_config = *config; 
+	return 1;
 }
 
 

@@ -19,16 +19,18 @@
 // pjsipDll.h : Declares the entry point for the .Net GUI application.
 //
 
-#ifdef LINUX
-	#define __stdcall
-	#define PJSIPDLL_DLL_API
-#else
-#ifdef PJSIPDLL_EXPORTS
-	#define PJSIPDLL_DLL_API __declspec(dllexport)
-#else
-	#define PJSIPDLL_DLL_API __declspec(dllimport)
-#endif
-#endif
+// #ifdef LINUX
+// 	#define __stdcall
+// 	#define PJSIPDLL_DLL_API
+// #else
+// #ifndef PJSIPDLL_EXPORTS
+// 	#define PJSIPDLL_DLL_API __declspec(dllexport)
+// #else
+// 	#define PJSIPDLL_DLL_API __declspec(dllimport)
+// #endif
+// #endif
+
+#define PJSIPDLL_DLL_API __declspec(dllexport)
 
 
 // Structure containing pjsip configuration parameters
@@ -86,18 +88,18 @@ struct PjMediaAudDevInfo
 };
 
 // calback function definitions
-typedef int __stdcall fptr_regstate(int, int);				// on registration state changed
-typedef int __stdcall fptr_callstate(int, int);	// on call state changed
-typedef int __stdcall fptr_callmediastate(int, int); // on call media state changed
-typedef int __stdcall fptr_callincoming(int, char*, char*, char*);	// on call incoming
-typedef int __stdcall fptr_getconfigdata(int);	// get config data
-typedef int __stdcall fptr_callholdconf(int);
-typedef int __stdcall fptr_callretrieveconf(int);
-typedef int __stdcall fptr_msgrec (char*, char*);
-typedef int __stdcall fptr_buddystatus(int, int, const char*);
-typedef int __stdcall fptr_dtmfdigit(int callId, int digit);
-typedef int __stdcall fptr_mwi(int mwi, char* info);
-typedef int __stdcall fptr_crep(int oldid, int newid);
+typedef int __cdecl fptr_regstate(int, int);				// on registration state changed
+typedef int __cdecl fptr_callstate(int, int);	// on call state changed
+typedef int __cdecl fptr_callmediastate(int, int); // on call media state changed
+typedef int __cdecl fptr_callincoming(int, char*, char*, char*);	// on call incoming
+typedef int __cdecl fptr_getconfigdata(int);	// get config data
+typedef int __cdecl fptr_callholdconf(int);
+typedef int __cdecl fptr_callretrieveconf(int);
+typedef int __cdecl fptr_msgrec (char*, char*);
+typedef int __cdecl fptr_buddystatus(int, int, const char*);
+typedef int __cdecl fptr_dtmfdigit(int callId, int digit);
+typedef int __cdecl fptr_mwi(int mwi, char* info);
+typedef int __cdecl fptr_crep(int oldid, int newid);
 
 // Callback registration 
 extern "C" PJSIPDLL_DLL_API int onRegStateCallback(fptr_regstate cb);	  // register registration notifier
@@ -113,7 +115,7 @@ extern "C" PJSIPDLL_DLL_API int onCallReplaced(fptr_crep cb); // register Call r
 extern "C" PJSIPDLL_DLL_API int onCallMediaStateChanged(fptr_callmediastate cb);
 
 // pjsip common API
-extern "C" PJSIPDLL_DLL_API void dll_setSipConfig(SipConfigStruct* config);
+extern "C" PJSIPDLL_DLL_API int dll_setSipConfig(SipConfigStruct* config);
 extern "C" PJSIPDLL_DLL_API int dll_init();
 extern "C" PJSIPDLL_DLL_API int dll_shutdown(); 
 extern "C" PJSIPDLL_DLL_API int dll_main(void);
