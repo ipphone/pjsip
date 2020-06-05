@@ -23,10 +23,27 @@ jobs:
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     
     - name: Build pjsip
-      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:PJ_Configuration -p:Platform=$env:Platform
+      run: |
+        msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:PJ_Configuration -p:Platform=$env:Platform
+        msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform
 
-    - name: Upload build artifacts
+    # - name: Upload build artifacts - pjsipDll
+    #   if: always()
+    #   uses: actions/upload-artifact@v1.0.0
+    #   with:
+    #     name: pj
+    #     path: pjsipdll\build
+        
+    # - name: Upload build artifacts - pjsipDll
+    #   if: always()
+    #   uses: actions/upload-artifact@v1.0.0
+    #   with:
+    #     name: pjsipdll
+    #     path: pjsipdll\build
+
+    - name: Upload build artifacts - pjsipDll
+      if: always()
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: pjsipDll
-        path: pjsipdll\build\$env:Configuration
+        name: pjsipdll
+        path: pjsipdll\build
