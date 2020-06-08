@@ -52,7 +52,7 @@ PJSIPDLL_DLL_API int onWavPlayerEndedCallback(fptr_wavplayerEnded cb)
 
 static PJ_DEF(pj_status_t) on_wavplayerEof_callback(pjmedia_port* media_port, void* args)
 {
-       pj_status_t status;
+       //pj_status_t status;
        wavplayerEof_Data* WavePlayerData = ((wavplayerEof_Data*) args);
  
        // Read info from args
@@ -70,8 +70,8 @@ static PJ_DEF(pj_status_t) on_wavplayerEof_callback(pjmedia_port* media_port, vo
        if (cb_wavplayerEnded != 0)
                (*cb_wavplayerEnded)(call_id, player_id);
 
-       if (status == PJ_SUCCESS)    // Player correctly Destroyed
-               return -1;                      // Don't return PJ_SUCCESS, to prevent crash when returning from callback after Player Destruction
+       //if (status == PJ_SUCCESS)    // Player correctly Destroyed
+       //        return -1;                      // Don't return PJ_SUCCESS, to prevent crash when returning from callback after Player Destruction
 
        return PJ_SUCCESS;             // Else, return PJ_SUCCESS
 

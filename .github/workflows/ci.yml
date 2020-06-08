@@ -10,8 +10,10 @@ jobs:
 
     env:
       Platform: Win32
-      Configuration: Release
-      PJ_Configuration: Release-Static
+      Configuration: Release-Static
+      BuildType: CI
+      VERSION_MAJOR: 1
+      VERSION_MINOR: 12
 
     steps:
     - name: Checkout
@@ -22,27 +24,25 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     
+    - name: Expose version variables
+      run: |
+        echo "::set-env name=VERSION_REVISION::$env:GITHUB_RUN_ID"
+        echo "::set-env name=VERSION_BUILD::$($env:GITHUB_RUN_NUMBER-1)"
+        echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType-$env:VERSION_BUILD"
+        echo "::set-output name=VERSION::$env:VERSION"
+    
     - name: Build pjsip
-      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:PJ_Configuration -p:Platform=$env:Platform
-#        msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform
+      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
 
-    # - name: Upload build artifacts - pjsipDll
-    #   if: always()
-    #   uses: actions/upload-artifact@v1.0.0
-    #   with:
-    #     name: pj
-    #     path: pjsipdll\build
-        
-    # - name: Upload build artifacts - pjsipDll
-    #   if: always()
-    #   uses: actions/upload-artifact@v1.0.0
-    #   with:
-    #     name: pjsipdll
-    #     path: pjsipdll\build
-
-    - name: Upload build artifacts - pjsipDll
+    - name: Upload build artifacts - pjsipdll
       if: always()
       uses: actions/upload-artifact@v1.0.0
       with:
         name: pjsipdll
         path: pjsipdll\bin
+
+    - name: Setup NuGet
+      uses: warrenbuckley/Setup-Nuget@v1
+    
+    - name: Build NuGet package
+      run: nuget pack pjsipdll\build\*.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration;Platform=$env:Platform
