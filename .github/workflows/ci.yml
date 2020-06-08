@@ -47,13 +47,18 @@ jobs:
 
     - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1
+
+#    - name: Add github package repository
+#      run: nuget sources add -Name github -Source https://nuget.pkg.github.com/ipphone/index.json
     
     - name: Build NuGet package
-      run: nuget pack pjsipdll\build\*.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\nuget
+      run: |
+        nuget pack pjsipdll\build\*.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\nuget
+        nuget push pjsipdll\nuget\*.nupkg ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
 
-    - name: Upload nuget packages
-      if: always()
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: pjsipdll-nuget
-        path: pjsipdll\nuget
+    # - name: Upload nuget packages
+    #   if: always()
+    #   uses: actions/upload-artifact@v1.0.0
+    #   with:
+    #     name: pjsipdll-nuget
+    #     path: pjsipdll\nuget
