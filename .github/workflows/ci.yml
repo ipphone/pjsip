@@ -55,10 +55,10 @@ jobs:
         name: pjsipdll
         path: pjsipdll\bin
 
-    # - name: Setup github package repository
-    #   run: |
-    #     nuget sources add -name "github" -Source https://nuget.pkg.github.com/ipphone/index.json
-    #     nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
+    - name: Setup github package repository
+      run: |
+        nuget sources add -name "github" -Source https://nuget.pkg.github.com/ipphone/index.json
+        nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
     
     - name: Build NuGet package
       if: always()
