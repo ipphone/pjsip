@@ -20,9 +20,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     
     - name: Set VERSION_REVISION and VERSION_BUILD variables
       run: |
@@ -31,6 +28,19 @@ jobs:
 
     - name: Set VERSION variable
       run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
+
+    - name: Setup NuGet
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Setup .NET Core @ Latest
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: https://nuget.pkg.github.com/ipphone/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}    
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     
     - name: Build pjsip
       run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
@@ -45,19 +55,17 @@ jobs:
         name: pjsipdll
         path: pjsipdll\bin
 
-    - name: Setup NuGet
-      uses: warrenbuckley/Setup-Nuget@v1
-
-    - name: Setup github package repository
-      run: |
-        nuget sources add -name "github" -Source https://nuget.pkg.github.com/ipphone/index.json
-        nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
+    # - name: Setup github package repository
+    #   run: |
+    #     nuget sources add -name "github" -Source https://nuget.pkg.github.com/ipphone/index.json
+    #     nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
     
     - name: Build NuGet package
       if: always()
       run: |
-        nuget pack pjsipdll\build\*.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\nuget
-        nuget push pjsipdll\nuget\*.nupkg -ApiKey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
+        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\out
+        nuget push pjsipdll\out\IPPhone.pjsipDll.nupkg
+#        nuget push pjsipdll\nuget\*.nupkg -ApiKey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
 
     # - name: Upload nuget packages
     #   if: always()
