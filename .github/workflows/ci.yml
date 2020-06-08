@@ -30,7 +30,7 @@ jobs:
         echo "::set-env name=VERSION_BUILD::$env:GITHUB_RUN_NUMBER"
 
     - name: Set VERSION variable
-    - run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
+      run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
     
     - name: Build pjsip
       run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
