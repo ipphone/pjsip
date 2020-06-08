@@ -28,11 +28,15 @@ jobs:
       run: |
         echo "::set-env name=VERSION_REVISION::$env:GITHUB_RUN_ID"
         echo "::set-env name=VERSION_BUILD::$($env:GITHUB_RUN_NUMBER-1)"
-        echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType-$env:VERSION_BUILD"
+        echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
+        echo "VERSION: $env:VERSION"
         echo "::set-output name=VERSION::$env:VERSION"
     
     - name: Build pjsip
       run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
+
+    - name: Add VERSION file
+      run: $env:VERSION > pjsipdll\bin\VERSION
 
     - name: Upload build artifacts - pjsipdll
       if: always()
@@ -45,4 +49,4 @@ jobs:
       uses: warrenbuckley/Setup-Nuget@v1
     
     - name: Build NuGet package
-      run: nuget pack pjsipdll\build\*.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration;Platform=$env:Platform
+      run: nuget pack pjsipdll\build\*.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration
