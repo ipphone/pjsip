@@ -6,8 +6,10 @@
         <version>1.0.0</version>
         <authors>Alex Yevtushenko</authors>
         <owners>Alex Yevtushenko</owners>
-        <projectUrl>https://github.com/ipphone/pjsip/</projectUrl>
+        <projectUrl>https://github.com/ipphone/</projectUrl>
         <iconUrl>https://avatars3.githubusercontent.com/u/26443470</iconUrl>
+        <RepositoryUrl>https://github.com/ipphone/pjsip</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ContactPoint IP Phone SIP client implementation</description>
         <summary>ContactPoint IP Phone is an implementation of SIP softphone for Windows</summary>
