@@ -122,6 +122,8 @@
   <ItemGroup>
     <ClInclude Include="..\src\pjsipDll.h" />
     <ClInclude Include="..\src\pjsipDll_PlayWav.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\pjproject-1.8.10\pjlib-util\build\pjlib_util.vcxproj">
@@ -196,6 +198,9 @@
       <Project>{4b059dba-cd9c-4d0f-be8c-ffb4efd498e9}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pjsipDll.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

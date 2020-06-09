@@ -10,39 +10,66 @@ jobs:
 
     env:
       Platform: Win32
-      Configuration: Release
-      PJ_Configuration: Release-Static
+      Configuration: Release-Static
+      BuildType: ci
+      VERSION_MAJOR: 1
+      VERSION_MINOR: 12
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    
+    - name: Set VERSION_REVISION and VERSION_BUILD variables
+      run: |
+        echo "::set-env name=VERSION_REVISION::$env:GITHUB_RUN_ID"
+        echo "::set-env name=VERSION_BUILD::$env:GITHUB_RUN_NUMBER"
+
+    - name: Set VERSION variable
+      run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
+
+    - name: Setup NuGet
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Setup .NET Core @ Latest
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: https://nuget.pkg.github.com/ipphone/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}    
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     
     - name: Build pjsip
-      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:PJ_Configuration -p:Platform=$env:Platform
-#        msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform
+      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
 
-    # - name: Upload build artifacts - pjsipDll
-    #   if: always()
-    #   uses: actions/upload-artifact@v1.0.0
-    #   with:
-    #     name: pj
-    #     path: pjsipdll\build
-        
-    # - name: Upload build artifacts - pjsipDll
-    #   if: always()
-    #   uses: actions/upload-artifact@v1.0.0
-    #   with:
-    #     name: pjsipdll
-    #     path: pjsipdll\build
+    - name: Add VERSION file
+      run: $env:VERSION > pjsipdll\bin\VERSION
 
-    - name: Upload build artifacts - pjsipDll
+    - name: Upload build artifacts - pjsipdll
       if: always()
       uses: actions/upload-artifact@v1.0.0
       with:
         name: pjsipdll
         path: pjsipdll\bin
+
+    - name: Setup github package repository
+      run: |
+        nuget sources add -name "github" -Source https://nuget.pkg.github.com/ipphone/index.json
+        nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
+    
+    - name: Build NuGet package
+      if: always()
+      run: |
+        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\out
+        nuget push pjsipdll\out\*.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
+#        nuget push pjsipdll\nuget\*.nupkg -ApiKey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
+
+    # - name: Upload nuget packages
+    #   if: always()
+    #   uses: actions/upload-artifact@v1.0.0
+    #   with:
+    #     name: pjsipdll-nuget
+    #     path: pjsipdll\nuget

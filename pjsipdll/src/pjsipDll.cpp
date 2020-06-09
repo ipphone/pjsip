@@ -1309,7 +1309,6 @@ int dll_makeCall(int accountId, char* uri, SipHeader* headerCollection, int head
 {
 	int newcallId = -1;
 	pjsua_msg_data msg_data;
-	pj_pool_t *pool;
 
 	pj_str_t sipuri = pj_str(uri);
 
@@ -1436,8 +1435,6 @@ int dll_xferCallWithReplaces(int callId, int dstSession)
 	pjsip_generic_string_hdr refer_sub;
 	pj_str_t STR_REFER_SUB = { "Refer-Sub", 9 };
 	pj_str_t STR_FALSE = { "false", 5 };
-	pjsua_call_id ids[PJSUA_MAX_CALLS];
-	pjsua_call_info ci;
 
 	pjsua_msg_data_init(&msg_data);
 	if (app_config.no_refersub) {
@@ -1774,11 +1771,7 @@ int dll_setSoundDevice(char* playbackDeviceName, char* recordingDeviceName)
 {
 	int capture_dev = NULL_SND_DEV_ID;
 	int playback_dev = NULL_SND_DEV_ID;
-	unsigned int counti;
-	pjmedia_snd_dev_info 	info[255];
 	int cnt = -1;
-
-
 	int i, count;
 
 	count = pjmedia_snd_get_dev_count();
@@ -1786,7 +1779,7 @@ int dll_setSoundDevice(char* playbackDeviceName, char* recordingDeviceName)
 		return -1;
 	}
 
-	for (i=0; i<count; ++i) {
+	for (i = 0; i < count; ++i) {
 		const pjmedia_snd_dev_info *info;
 
 		info = pjmedia_snd_get_dev_info(i);
