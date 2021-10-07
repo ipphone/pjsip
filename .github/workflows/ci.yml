@@ -64,6 +64,7 @@ jobs:
     - name: Build NuGet package
       if: always()
       run: |
+        New-Item -Type Directory -Path pjsipdll\out
         nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\out
         nuget push pjsipdll\out\*.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
 #        nuget push pjsipdll\nuget\*.nupkg -ApiKey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
