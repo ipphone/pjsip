@@ -13,7 +13,7 @@ jobs:
       Configuration: Release-Static
       BuildType: ci
       VERSION_MAJOR: 1
-      VERSION_MINOR: 12
+      VERSION_MINOR: 13
 
     steps:
     - name: Checkout
@@ -23,8 +23,8 @@ jobs:
     
     - name: Set VERSION_REVISION and VERSION_BUILD variables
       run: |
-        echo "::set-env name=VERSION_REVISION::$env:GITHUB_RUN_ID"
-        echo "::set-env name=VERSION_BUILD::$env:GITHUB_RUN_NUMBER"
+        echo "VERSION_REVISION=$env:GITHUB_RUN_ID" >> $GITHUB_ENV
+        echo "VERSION_BUILD=$env:GITHUB_RUN_NUMBER" >> $GITHUB_ENV
 
     - name: Set VERSION variable
       run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
