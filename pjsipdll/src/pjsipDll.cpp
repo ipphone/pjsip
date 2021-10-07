@@ -1430,6 +1430,11 @@ int dll_xferCallWithHeaders(int callid, char* uri, SipHeader* headerCollection, 
 
 int dll_xferCallWithReplaces(int callId, int dstSession)
 {
+	return dll_xferCallWithReplacesAndHeaders(callId, dstSession, NULL, 0);
+}
+
+int dll_xferCallWithReplacesAndHeaders(int callId, int dstSession, SipHeader* headerCollection, int headersCount)
+{
 	int call = callId;
 	pjsua_msg_data msg_data;
 	pjsip_generic_string_hdr refer_sub;
@@ -1441,6 +1446,19 @@ int dll_xferCallWithReplaces(int callId, int dstSession)
 		/* Add Refer-Sub: false in outgoing REFER request */
 		pjsip_generic_string_hdr_init2(&refer_sub, &STR_REFER_SUB, &STR_FALSE);
 		pj_list_push_back(&msg_data.hdr_list, &refer_sub);
+	}
+
+	if (headerCollection != NULL && headersCount > 0)
+	{
+		for (int i = 0; i < headersCount; i++)
+		{
+			pjsip_generic_string_hdr hdr;
+			pj_str_t name = pj_str(headerCollection[i].name);
+			pj_str_t value = pj_str(headerCollection[i].value);
+
+			pjsip_generic_string_hdr_init2(&hdr, &name, &value);
+			pj_list_push_back(&msg_data.hdr_list, &hdr);
+		}
 	}
 
 	pjsua_call_xfer_replaces(call, dstSession, 0, &msg_data);

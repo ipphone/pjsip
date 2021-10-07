@@ -6,7 +6,7 @@
 #endif
 
 #ifndef VERSION_MINOR
-  #define VERSION_MINOR               12
+  #define VERSION_MINOR               13
 #endif
 
 #ifndef VERSION_REVISION
@@ -29,7 +29,7 @@
 #define VER_PRODUCT_VERSION_STR     VER_FILE_VERSION_STR
 #define VER_ORIGINAL_FILENAME_STR   "pjsipDll.dll"
 #define VER_INTERNAL_NAME_STR       "pjsipDll.dll"
-#define VER_COPYRIGHT_STR           "Copyright (C) ContactPoint 2020"
+#define VER_COPYRIGHT_STR           "Copyright (C) ContactPoint 2021"
 
 #ifdef _DEBUG
   #define VER_VER_DEBUG             VS_FF_DEBUG
