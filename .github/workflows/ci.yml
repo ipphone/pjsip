@@ -27,7 +27,7 @@ jobs:
         echo "VERSION_BUILD=$env:GITHUB_RUN_NUMBER" >> $GITHUB_ENV
 
     - name: Set VERSION variable
-      run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
+      run: echo "VERSION=$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD" >> $GITHUB_ENV
 
     - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1
