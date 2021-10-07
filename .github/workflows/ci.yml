@@ -64,7 +64,7 @@ jobs:
     - name: Pack&Push NuGet packages
       if: always()
       run: |
-        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration
+        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Verbosity detailed -Version $env:VERSION -Properties Configuration=$env:Configuration
         nuget push IPPhone.pjsipDll.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
 
     # - name: Upload nuget packages
