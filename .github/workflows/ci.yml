@@ -14,6 +14,9 @@ jobs:
       BuildType: ci
       VERSION_MAJOR: 1
       VERSION_MINOR: 13
+      VERSION_REVISION: ""
+      VERSION_BUILD: ""
+      VERSION: ""
 
     steps:
     - name: Checkout
@@ -23,12 +26,12 @@ jobs:
     
     - name: Set VERSION_REVISION and VERSION_BUILD variables
       run: |
-        echo "VERSION_REVISION=$env:GITHUB_RUN_ID" >> GITHUB_ENV
-        echo "VERSION_BUILD=$env:GITHUB_RUN_NUMBER" >> GITHUB_ENV
+        echo "VERSION_REVISION=${{env.GITHUB_RUN_ID}}" >> $GITHUB_ENV
+        echo "VERSION_BUILD=${{env.GITHUB_RUN_NUMBER}}" >> $GITHUB_ENV
 
     - name: Set VERSION variable
       run: |
-        echo "VERSION=$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD" >> GITHUB_ENV
+        echo "VERSION=${{env.VERSION_MAJOR}}.${{env.VERSION_MINOR}}.${{env.VERSION_REVISION}}-${{env.BuildType}}${{env.VERSION_BUILD}}" >> $GITHUB_ENV
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
@@ -44,10 +47,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.3
     
     - name: Build pjsip
-      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
+      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
 
     - name: Add VERSION file
-      run: $env:VERSION > pjsipdll\bin\VERSION
+      run: echo "${{env.VERSION}}" > pjsipdll\bin\VERSION
 
     - name: Upload build artifacts - pjsipdll
       if: always()
@@ -64,7 +67,7 @@ jobs:
     - name: Pack&Push NuGet packages
       if: always()
       run: |
-        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\out
+        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version ${{env.VERSION}} -Properties Configuration=${{env.Configuration}} -OutputDirectory pjsipdll\out
         nuget push pjsipdll\out\*.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
 
     # - name: Upload nuget packages
