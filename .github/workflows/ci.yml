@@ -14,6 +14,8 @@ jobs:
       BuildType: ci
       VERSION_MAJOR: 1
       VERSION_MINOR: 13
+      
+      # Declare env variables
       VERSION_REVISION: ""
       VERSION_BUILD: ""
       VERSION: ""
@@ -26,8 +28,8 @@ jobs:
     
     - name: Set VERSION_REVISION and VERSION_BUILD variables
       run: |
-        echo "VERSION_REVISION=${{env.GITHUB_RUN_ID}}" >> $GITHUB_ENV
-        echo "VERSION_BUILD=${{env.GITHUB_RUN_NUMBER}}" >> $GITHUB_ENV
+        echo "VERSION_REVISION=${{ github.run_id }}" >> $GITHUB_ENV
+        echo "VERSION_BUILD=${{ github.run_number }}" >> $GITHUB_ENV
 
     - name: Set VERSION variable
       run: |
