@@ -22,13 +22,13 @@ jobs:
         fetch-depth: 0
     
     - name: Set VERSION_REVISION and VERSION_BUILD variables
-      run: |
-        echo "VERSION_REVISION=${{ github.run_id }}" >> $GITHUB_ENV
-        echo "VERSION_BUILD=${{ github.run_number }}" >> $GITHUB_ENV
+      env:
+        VERSION_REVISION: ${{ github.run_id }}
+        VERSION_BUILD: ${{ github.run_number }}
 
     - name: Set VERSION variable
-      run: |
-        echo "VERSION=${{env.VERSION_MAJOR}}.${{env.VERSION_MINOR}}.${{env.VERSION_REVISION}}-${{env.BuildType}}${{env.VERSION_BUILD}}" >> $GITHUB_ENV
+      env:
+        VERSION: ${{env.VERSION_MAJOR}}.${{env.VERSION_MINOR}}.${{env.VERSION_REVISION}}-${{env.BuildType}}${{env.VERSION_BUILD}}
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
