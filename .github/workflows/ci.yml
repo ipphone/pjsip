@@ -26,17 +26,16 @@ jobs:
       with:
         fetch-depth: 0
     
-    - name: Set VERSION_BUILD variable
+    - name: SetVERSION_BUILD and VERSION_REVISION
+      shell: bash
       run: |
         echo "VERSION_BUILD=${{ github.run_number }}" >> $GITHUB_ENV
-    
-    - name: Set VERSION_REVISION variable
-      run: |
         echo "VERSION_REVISION=${{ github.run_id }}" >> $GITHUB_ENV
 
     - name: Set VERSION variable
+      shell: bash
       run: |
-        echo "VERSION=${{env.VERSION_MAJOR}}.${{env.VERSION_MINOR}}.${{env.VERSION_REVISION}}-${{env.BuildType}}${{env.VERSION_BUILD}}" >> $GITHUB_ENV
+        echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}-${{ env.BuildType }}${{ env.VERSION_BUILD }}" >> $GITHUB_ENV
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
@@ -55,7 +54,7 @@ jobs:
       run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
 
     - name: Add VERSION file
-      run: echo "${{env.VERSION}}" > pjsipdll\bin\VERSION
+      run: echo "${{ env.VERSION }}" > pjsipdll\bin\VERSION
 
     - name: Upload build artifacts - pjsipdll
       if: always()
@@ -72,7 +71,7 @@ jobs:
     - name: Pack&Push NuGet packages
       if: always()
       run: |
-        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version ${{env.VERSION}} -Properties Configuration=${{env.Configuration}} -OutputDirectory pjsipdll\out
+        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version ${{ env.VERSION }} -Properties Configuration=${{env.Configuration}} -OutputDirectory pjsipdll\out
         nuget push pjsipdll\out\*.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
 
     # - name: Upload nuget packages
