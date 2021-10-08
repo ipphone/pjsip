@@ -14,11 +14,6 @@ jobs:
       BuildType: ci
       VERSION_MAJOR: 1
       VERSION_MINOR: 13
-      
-      # Declare env variables
-      VERSION_REVISION: ""
-      VERSION_BUILD: ""
-      VERSION: ""
 
     steps:
     - name: Checkout
