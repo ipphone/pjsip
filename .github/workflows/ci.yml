@@ -25,10 +25,15 @@ jobs:
       env:
         VERSION_REVISION: ${{ github.run_id }}
         VERSION_BUILD: ${{ github.run_number }}
+      run: |
+        echo "VERSION_BUILD=${{ env.VERSION_BUILD }}"
+        echo "VERSION_REVISION=${{ env.VERSION_REVISION }}"
 
     - name: Set VERSION variable
       env:
         VERSION: ${{env.VERSION_MAJOR}}.${{env.VERSION_MINOR}}.${{env.VERSION_REVISION}}-${{env.BuildType}}${{env.VERSION_BUILD}}
+      run: |
+        echo "VERSION=${{ env.VERSION }}"
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
