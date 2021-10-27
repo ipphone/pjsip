@@ -48,8 +48,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.3
     
     - name: Build pjsip
-      #run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
-      run: msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
+      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
+      #run: msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
 
     - name: Add VERSION file
       run: echo "${{ env.VERSION }}" > pjsipdll\bin\VERSION
