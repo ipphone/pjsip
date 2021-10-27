@@ -46,7 +46,7 @@ jobs:
       shell: bash
       if: env.BuildType == 'master'
       run: |
-        echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}-${{ env.BuildType }}${{ env.VERSION_BUILD }}" >> $GITHUB_ENV
+        echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}" >> $GITHUB_ENV
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
