@@ -16,6 +16,7 @@ jobs:
       BuildType: ci
       VERSION_MAJOR: 1
       VERSION_MINOR: 13
+      VERSION_REVISION: 2
 
     steps:
     - name: Set BuildType = master
@@ -23,17 +24,11 @@ jobs:
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         echo "BuildType=master" >> $GITHUB_ENV
-
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
     
-    - name: Set VERSION_BUILD and VERSION_REVISION
+    - name: Set VERSION_BUILD
       shell: bash
       run: |
         echo "VERSION_BUILD=${{ github.run_number }}" >> $GITHUB_ENV
-        echo "VERSION_REVISION=${{ github.run_id }}" >> $GITHUB_ENV
 
     - name: Set VERSION variable
       shell: bash
@@ -46,6 +41,11 @@ jobs:
       if: env.BuildType == 'master'
       run: |
         echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}" >> $GITHUB_ENV
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
@@ -62,7 +62,6 @@ jobs:
     
     - name: Build pjsip
       run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
-      #run: msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
 
     - name: Add VERSION file
       run: echo "${{ env.VERSION }}" > pjsipdll\bin\VERSION
