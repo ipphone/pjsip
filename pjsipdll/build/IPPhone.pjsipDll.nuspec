@@ -17,6 +17,5 @@
     </metadata>
     <files>
         <file src="../bin/pjsipDll.dll" target="lib" />
-        <file src="../bin/pjsipDll.pdb" target="lib" />
     </files>
 </package>
