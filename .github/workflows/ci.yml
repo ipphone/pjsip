@@ -18,12 +18,19 @@ jobs:
       VERSION_MINOR: 13
 
     steps:
+    - name: Set isCI variable
+      shell: bash
+      if: |
+        github.event_name == 'push' && github.head_ref == 'master'
+      run: |
+        echo "BuildType=master" >> $GITHUB_ENV
+
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
     
-    - name: SetVERSION_BUILD and VERSION_REVISION
+    - name: Set VERSION_BUILD and VERSION_REVISION
       shell: bash
       run: |
         echo "VERSION_BUILD=${{ github.run_number }}" >> $GITHUB_ENV
@@ -31,6 +38,13 @@ jobs:
 
     - name: Set VERSION variable
       shell: bash
+      if: env.BuildType == 'ci'
+      run: |
+        echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}-${{ env.BuildType }}${{ env.VERSION_BUILD }}" >> $GITHUB_ENV
+
+    - name: Set VERSION variable
+      shell: bash
+      if: env.BuildType == 'master'
       run: |
         echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}-${{ env.BuildType }}${{ env.VERSION_BUILD }}" >> $GITHUB_ENV
 
