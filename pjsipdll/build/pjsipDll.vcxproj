@@ -98,7 +98,13 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>Cdecl</CallingConvention>
       <Optimization>Disabled</Optimization>
-	</ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <UseStandardPreprocessor>false</UseStandardPreprocessor>
+      <BasicRuntimeChecks />
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ControlFlowGuard>false</ControlFlowGuard>
+    </ClCompile>
     <Link>
       <AdditionalDependencies>Iphlpapi.lib;dsound.lib;netapi32.lib;dxguid.lib;mswsock.lib;ws2_32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)pjsipDll.dll</OutputFile>
