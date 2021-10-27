@@ -1699,7 +1699,7 @@ int dll_setCodecPriority(char* name, int prio)
 }
 
 
-int dll_getCurrentCodec(pjsua_call_id call_id, char* codec)
+int dll_getCurrentCodec(int call_id, char* codec)
 {	
 	pjmedia_session_info media_info;
 	pj_status_t status;
