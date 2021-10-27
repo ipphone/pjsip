@@ -3,6 +3,8 @@ name: CI
 on:
   pull_request:
     branches: [ master ]
+  push:
+    branches: [ master ]
 
 jobs:
   build:
@@ -10,10 +12,10 @@ jobs:
 
     env:
       Platform: Win32
-      Configuration: Release-Static
+      Configuration: Debug-Static
       BuildType: ci
       VERSION_MAJOR: 1
-      VERSION_MINOR: 12
+      VERSION_MINOR: 13
 
     steps:
     - name: Checkout
@@ -21,16 +23,19 @@ jobs:
       with:
         fetch-depth: 0
     
-    - name: Set VERSION_REVISION and VERSION_BUILD variables
+    - name: SetVERSION_BUILD and VERSION_REVISION
+      shell: bash
       run: |
-        echo "::set-env name=VERSION_REVISION::$env:GITHUB_RUN_ID"
-        echo "::set-env name=VERSION_BUILD::$env:GITHUB_RUN_NUMBER"
+        echo "VERSION_BUILD=${{ github.run_number }}" >> $GITHUB_ENV
+        echo "VERSION_REVISION=${{ github.run_id }}" >> $GITHUB_ENV
 
     - name: Set VERSION variable
-      run: echo "::set-env name=VERSION::$env:VERSION_MAJOR.$env:VERSION_MINOR.$env:VERSION_REVISION-$env:BuildType$env:VERSION_BUILD"
+      shell: bash
+      run: |
+        echo "VERSION=${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}.${{ env.VERSION_REVISION }}-${{ env.BuildType }}${{ env.VERSION_BUILD }}" >> $GITHUB_ENV
 
     - name: Setup NuGet
-      uses: warrenbuckley/Setup-Nuget@v1
+      uses: nuget/setup-nuget@v1
 
     - name: Setup .NET Core @ Latest
       uses: actions/setup-dotnet@v1
@@ -40,13 +45,14 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}    
 
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+      uses: microsoft/setup-msbuild@v1.0.3
     
     - name: Build pjsip
-      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=$env:Configuration -p:Platform=$env:Platform -p:DefineConstants="VERSION_MAJOR=$env:VERSION_MAJOR;VERSION_MINOR=$env:VERSION_MINOR;VERSION_REVISION=$env:VERSION_REVISION;VERSION_BUILD=$env:VERSION_BUILD"
+      run: msbuild pjproject-1.8.10\pjproject-vs8.sln -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
+      #run: msbuild pjsipdll\build\pjsipDll.vcxproj -t:Build -p:Configuration=${{env.Configuration}} -p:Platform=${{env.Platform}} -p:DefineConstants="VERSION_MAJOR=${{env.VERSION_MAJOR}};VERSION_MINOR=${{env.VERSION_MINOR}};VERSION_REVISION=${{env.VERSION_REVISION}};VERSION_BUILD=${{env.VERSION_BUILD}}"
 
     - name: Add VERSION file
-      run: $env:VERSION > pjsipdll\bin\VERSION
+      run: echo "${{ env.VERSION }}" > pjsipdll\bin\VERSION
 
     - name: Upload build artifacts - pjsipdll
       if: always()
@@ -60,16 +66,8 @@ jobs:
         nuget sources add -name "github" -Source https://nuget.pkg.github.com/ipphone/index.json
         nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
     
-    - name: Build NuGet package
+    - name: Pack&Push NuGet packages
       if: always()
       run: |
-        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version $env:VERSION -Properties Configuration=$env:Configuration -OutputDirectory pjsipdll\out
+        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version ${{ env.VERSION }} -Properties Configuration=${{env.Configuration}} -OutputDirectory pjsipdll\out
         nuget push pjsipdll\out\*.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
-#        nuget push pjsipdll\nuget\*.nupkg -ApiKey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/ipphone/index.json
-
-    # - name: Upload nuget packages
-    #   if: always()
-    #   uses: actions/upload-artifact@v1.0.0
-    #   with:
-    #     name: pjsipdll-nuget
-    #     path: pjsipdll\nuget

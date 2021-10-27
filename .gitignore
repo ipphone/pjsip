@@ -49,3 +49,4 @@
 
 pjproject-1.8.10/**/bin/**
 pjsipdll/**/bin/**
+pjsipdll/out

@@ -136,6 +136,7 @@ extern "C" PJSIPDLL_DLL_API int dll_retrieveCall(int callId);
 extern "C" PJSIPDLL_DLL_API int dll_xferCall(int callid, char* uri);
 extern "C" PJSIPDLL_DLL_API int dll_xferCallWithHeaders(int callid, char* uri, SipHeader* headers, int headersCount);
 extern "C" PJSIPDLL_DLL_API int dll_xferCallWithReplaces(int callId, int dstSession);
+extern "C" PJSIPDLL_DLL_API int dll_xferCallWithReplacesAndHeaders(int callId, int dstSession, SipHeader* headerCollection, int headersCount);
 extern "C" PJSIPDLL_DLL_API int dll_serviceReq(int callId, int serviceCode, const char* destUri);
 extern "C" PJSIPDLL_DLL_API int dll_dialDtmf(int callId, char* digits, int mode);
 extern "C" PJSIPDLL_DLL_API int dll_removeAccounts();
