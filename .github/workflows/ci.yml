@@ -18,10 +18,9 @@ jobs:
       VERSION_MINOR: 13
 
     steps:
-    - name: Set isCI variable
+    - name: Set BuildType = master
       shell: bash
-      if: |
-        github.event_name == 'push' && github.head_ref == 'master'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         echo "BuildType=master" >> $GITHUB_ENV
 
