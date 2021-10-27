@@ -97,7 +97,8 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
+      <Optimization>Disabled</Optimization>
+	</ClCompile>
     <Link>
       <AdditionalDependencies>Iphlpapi.lib;dsound.lib;netapi32.lib;dxguid.lib;mswsock.lib;ws2_32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)pjsipDll.dll</OutputFile>
