@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\adaptativeCodebookSearch.c" />
+    <ClCompile Include="..\src\cng.c" />
+    <ClCompile Include="..\src\codebooks.c" />
+    <ClCompile Include="..\src\computeAdaptativeCodebookGain.c" />
+    <ClCompile Include="..\src\computeLP.c" />
+    <ClCompile Include="..\src\computeWeightedSpeech.c" />
+    <ClCompile Include="..\src\decodeAdaptativeCodeVector.c" />
+    <ClCompile Include="..\src\decodeFixedCodeVector.c" />
+    <ClCompile Include="..\src\decodeGains.c" />
+    <ClCompile Include="..\src\decodeLSP.c" />
+    <ClCompile Include="..\src\decoder.c" />
+    <ClCompile Include="..\src\dtx.c" />
+    <ClCompile Include="..\src\encoder.c" />
+    <ClCompile Include="..\src\findOpenLoopPitchDelay.c" />
+    <ClCompile Include="..\src\fixedCodebookSearch.c" />
+    <ClCompile Include="..\src\gainQuantization.c" />
+    <ClCompile Include="..\src\interpolateqLSP.c" />
+    <ClCompile Include="..\src\LP2LSPConversion.c" />
+    <ClCompile Include="..\src\LPSynthesisFilter.c" />
+    <ClCompile Include="..\src\LSPQuantization.c" />
+    <ClCompile Include="..\src\postFilter.c" />
+    <ClCompile Include="..\src\postProcessing.c" />
+    <ClCompile Include="..\src\preProcessing.c" />
+    <ClCompile Include="..\src\qLSP2LP.c" />
+    <ClCompile Include="..\src\utils.c" />
+    <ClCompile Include="..\src\vad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\adaptativeCodebookSearch.h" />
+    <ClInclude Include="..\src\basicOperationsMacros.h" />
+    <ClInclude Include="..\src\cng.h" />
+    <ClInclude Include="..\src\codebooks.h" />
+    <ClInclude Include="..\src\codecParameters.h" />
+    <ClInclude Include="..\src\computeAdaptativeCodebookGain.h" />
+    <ClInclude Include="..\src\computeLP.h" />
+    <ClInclude Include="..\src\computeWeightedSpeech.h" />
+    <ClInclude Include="..\src\config.h" />
+    <ClInclude Include="..\src\decodeAdaptativeCodeVector.h" />
+    <ClInclude Include="..\src\decodeFixedCodeVector.h" />
+    <ClInclude Include="..\src\decodeGains.h" />
+    <ClInclude Include="..\src\decodeLSP.h" />
+    <ClInclude Include="..\src\dtx.h" />
+    <ClInclude Include="..\src\findOpenLoopPitchDelay.h" />
+    <ClInclude Include="..\src\fixedCodebookSearch.h" />
+    <ClInclude Include="..\src\fixedPointMacros.h" />
+    <ClInclude Include="..\src\floatingPointMacros.h" />
+    <ClInclude Include="..\src\g729FixedPointMath.h" />
+    <ClInclude Include="..\src\gainQuantization.h" />
+    <ClInclude Include="..\src\interpolateqLSP.h" />
+    <ClInclude Include="..\src\LP2LSPConversion.h" />
+    <ClInclude Include="..\src\LPSynthesisFilter.h" />
+    <ClInclude Include="..\src\LSPQuantization.h" />
+    <ClInclude Include="..\src\postFilter.h" />
+    <ClInclude Include="..\src\postProcessing.h" />
+    <ClInclude Include="..\src\preProcessing.h" />
+    <ClInclude Include="..\src\qLSP2LP.h" />
+    <ClInclude Include="..\src\typedef.h" />
+    <ClInclude Include="..\src\utils.h" />
+    <ClInclude Include="..\src\vad.h" />
+    <ClInclude Include="..\include\bcg729\decoder.h" />
+    <ClInclude Include="..\include\bcg729\encoder.h" />
+  </ItemGroup>
+</Project>

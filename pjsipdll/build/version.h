@@ -6,7 +6,7 @@
 #endif
 
 #ifndef VERSION_MINOR
-  #define VERSION_MINOR               13
+  #define VERSION_MINOR               15
 #endif
 
 #ifndef VERSION_REVISION
