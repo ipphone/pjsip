@@ -16,7 +16,7 @@ jobs:
       BuildType: ci
       VERSION_MAJOR: 1
       VERSION_MINOR: 13
-      VERSION_REVISION: 3
+      VERSION_REVISION: 4
 
     steps:
     - name: Set BuildType = master
@@ -81,5 +81,5 @@ jobs:
     - name: Pack&Push NuGet packages
       if: always()
       run: |
-        nuget pack pjsipdll\build\IPPhone.pjsipDll.nuspec -Version ${{ env.VERSION }} -Properties Configuration=${{env.Configuration}} -OutputDirectory pjsipdll\out
+        nuget pack pjsipdll\build\IPPhone.pjsip.nuspec -Version ${{ env.VERSION }} -Properties Configuration=${{env.Configuration}} -OutputDirectory pjsipdll\out
         nuget push pjsipdll\out\*.nupkg -Source https://nuget.pkg.github.com/ipphone/index.json
