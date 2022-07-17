@@ -177,6 +177,10 @@
       <Project>{9ca0fdfb-2172-41fc-b7f1-5ce915edcb37}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\pjproject-1.8.10\third_party\bcg729\build\bcg729.vcxproj">
+      <Project>{924aba50-c14f-44b5-9e6b-9264efb09c47}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="..\..\pjproject-1.8.10\third_party\build\g7221\libg7221codec.vcxproj">
       <Project>{2a3f241e-682c-47e1-9543-dc28708b406a}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

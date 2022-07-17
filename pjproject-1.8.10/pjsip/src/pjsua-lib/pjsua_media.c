@@ -162,6 +162,15 @@ pj_status_t pjsua_media_subsys_init(const pjsua_media_config *cfg)
     }
 #endif /* PJMEDIA_HAS_GSM_CODEC */
 
+/* BCG729 CODEC */
+		status = pjmedia_codec_bcg729_init(pjsua_var.med_endpt);
+		if (status != PJ_SUCCESS) {
+			pjsua_perror(THIS_FILE, "Error initializing BCG729 codec",
+				status);
+			return status;
+		}
+/* BCG729 CODEC */
+
 #if PJMEDIA_HAS_G711_CODEC
     /* Register PCMA and PCMU */
     status = pjmedia_codec_g711_init(pjsua_var.med_endpt);
@@ -704,6 +713,10 @@ pj_status_t pjsua_media_subsys_destroy(void)
 #	if PJMEDIA_HAS_GSM_CODEC
 	    pjmedia_codec_gsm_deinit();
 #	endif /* PJMEDIA_HAS_GSM_CODEC */
+
+/* BCG729 CODEC */
+			pjmedia_codec_bcg729_deinit();
+/* BCG729 CODEC */
 
 #	if PJMEDIA_HAS_G711_CODEC
 	    pjmedia_codec_g711_deinit();

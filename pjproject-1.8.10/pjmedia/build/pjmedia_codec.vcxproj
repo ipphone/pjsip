@@ -104,6 +104,10 @@
   <PropertyGroup>
     <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\a\Projects\ipphone\bcg729\src;C:\Users\a\Projects\ipphone\bcg729\include;</ExternalIncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>../include;../../pjlib/include;../../third_party/speex/include;../../third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -156,15 +160,18 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>../include;../../pjlib/include;../../third_party/speex/include;../../third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../../pjlib/include;../../third_party/speex/include;../../third_party/bcg729/include;../../third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_LIB;_WIN32;BCG729_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderOutputFile />
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
     </ClCompile>
     <Lib>
       <OutputFile>..\lib\pjmedia-codec-$(TargetCPU)-$(Platform)-vc$(VSVer)-$(Configuration).lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\pjmedia-codec\bcg729.c" />
     <ClCompile Include="..\src\pjmedia-codec\g722.c" />
     <ClCompile Include="..\src\pjmedia-codec\g7221.c" />
     <ClCompile Include="..\src\pjmedia-codec\gsm.c" />
@@ -177,6 +184,7 @@
     <ClCompile Include="..\src\pjmedia-codec\g722\g722_enc.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\pjmedia-codec\bcg729.h" />
     <ClInclude Include="..\src\pjmedia-codec\g722\g722_dec.h" />
     <ClInclude Include="..\src\pjmedia-codec\g722\g722_enc.h" />
     <ClInclude Include="..\include\pjmedia-codec\amr_helper.h" />
